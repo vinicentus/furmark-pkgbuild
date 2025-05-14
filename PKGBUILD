@@ -2,7 +2,7 @@
 
 pkgname=furmark
 pkgver=2.7.0.0
-pkgrel=3
+pkgrel=4
 pkgdesc='Lightweight but intensive GPU stress test and benchmarking tool for OpenGL and Vulkan'
 arch=('x86_64' 'aarch64')
 url='https://www.geeks3d.com/furmark/v2/'
@@ -19,7 +19,7 @@ sha256sums_aarch64=('F2039230CECB46C294FF632CC04A5ADABA7FBA39F3B6C775B585E268162
 
 package(){
     install -d "$pkgdir/opt/$pkgname/"
-    cp -a "$srcdir/FurMark_linux64/" "$pkgdir/opt/$pkgname/"
+    cp -a "$srcdir/FurMark_linux64/." "$pkgdir/opt/$pkgname/"
 
     install -d "$pkgdir/usr/bin/"
     ln -s "/opt/$pkgname/furmark" "$pkgdir/usr/bin/furmark"
