@@ -2,7 +2,7 @@
 
 pkgname=furmark
 pkgver=2.8.0.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Lightweight but intensive GPU stress test and benchmarking tool for OpenGL and Vulkan'
 arch=('x86_64' 'aarch64')
 url='https://www.geeks3d.com/furmark/v2/'
@@ -25,8 +25,8 @@ package(){
     ln -s "/opt/$pkgname/furmark" "$pkgdir/usr/bin/furmark"
     ln -s "/opt/$pkgname/FurMark_GUI" "$pkgdir/usr/bin/furmark-gui"
 
-    # TODO: make this a symlink as well
-    install -Dm644 "$srcdir/FurMark_linux64/EULA.txt" "$pkgdir/usr/share/licenses/$pkgname/EULA.txt"
+    install -d "$pkgdir/usr/share/licenses/$pkgname"
+    ln -s "/opt/$pkgname/EULA.txt" "$pkgdir/usr/share/licenses/$pkgname/EULA.txt"
 
     # Install icon
     install -Dm644 "$srcdir/20240220-furmark-logo-02.png" "$pkgdir/usr/share/pixmaps/$pkgname.png"
