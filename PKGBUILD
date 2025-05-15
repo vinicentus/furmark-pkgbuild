@@ -2,7 +2,7 @@
 
 pkgname=furmark
 pkgver=2.8.0.0
-pkgrel=3
+pkgrel=4
 pkgdesc='Lightweight but intensive GPU stress test and benchmarking tool for OpenGL and Vulkan'
 arch=('x86_64' 'aarch64')
 url='https://www.geeks3d.com/furmark/v2/'
@@ -28,16 +28,29 @@ package(){
     install -d "$pkgdir/usr/share/licenses/$pkgname"
     ln -s "/opt/$pkgname/EULA.txt" "$pkgdir/usr/share/licenses/$pkgname/EULA.txt"
 
-    touch "$pkgdir/opt/$pkgname/_furmark_log.txt"
-    touch "$pkgdir/opt/$pkgname/_geexlab_log.txt"
-    touch "$pkgdir/opt/$pkgname/settings.lua"
-    touch "$pkgdir/opt/$pkgname/conf.xml"
+
+    # Create config directory
+    install -dm757 "$pkgdir/etc/opt/$pkgname"
+
+    # Copy config files into writeable directory
+    cp "$pkgdir/opt/$pkgname/settings.lua"  "$pkgdir/etc/opt/$pkgname/settings.lua"
+    cp "$pkgdir/opt/$pkgname/conf.xml"      "$pkgdir/etc/opt/$pkgname/conf.xml"
+    # Delete original defaults
+    rm "$pkgdir/opt/$pkgname/settings.lua"
+    rm "$pkgdir/opt/$pkgname/conf.xml"
+    # Set permissions
+    chmod 646 "$pkgdir/etc/opt/$pkgname/settings.lua"
+    chmod 646 "$pkgdir/etc/opt/$pkgname/conf.xml"
+
+    # Create log directory
+    install -dm757 "$pkgdir/var/log/$pkgname"
+
+    ln -s "/var/log/$pkgname/furmark.log"   "$pkgdir/opt/$pkgname/_furmark_log.txt"
+    ln -s "/var/log/$pkgname/geexlab.log"   "$pkgdir/opt/$pkgname/_geexlab_log.txt"
+    ln -s "/etc/opt/$pkgname/settings.lua"  "$pkgdir/opt/$pkgname/settings.lua"
+    ln -s "/etc/opt/$pkgname/conf.xml"      "$pkgdir/opt/$pkgname/conf.xml"
+
     # touch imgui.ini # idk what this is, probably not needed
-    
-    chmod 646 "$pkgdir/opt/$pkgname/_furmark_log.txt"
-    chmod 646 "$pkgdir/opt/$pkgname/_geexlab_log.txt"
-    chmod 646 "$pkgdir/opt/$pkgname/settings.lua"
-    chmod 646 "$pkgdir/opt/$pkgname/conf.xml"
 
     # Install icon
     install -Dm644 "$srcdir/20240220-furmark-logo-02.png" "$pkgdir/usr/share/pixmaps/$pkgname.png"
@@ -48,3 +61,6 @@ package(){
     # gendesk --pkgname "$pkgname" --pkgdesc "$pkgdesc" --exec "furmark-gui" --categories "Graphics" --name "FurMark GUI"
     install -Dm644 "$srcdir/furmark-gui.desktop" "$pkgdir/usr/share/applications/$pkgname.desktop"
 }
+
+# Save config files if modified by the user
+backup=("etc/opt/$pkgname/settings.lua" "etc/opt/$pkgname/conf.xml")
