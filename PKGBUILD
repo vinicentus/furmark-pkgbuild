@@ -2,7 +2,7 @@
 
 pkgname=furmark
 pkgver=2.8.0.0
-pkgrel=2
+pkgrel=3
 pkgdesc='Lightweight but intensive GPU stress test and benchmarking tool for OpenGL and Vulkan'
 arch=('x86_64' 'aarch64')
 url='https://www.geeks3d.com/furmark/v2/'
@@ -27,6 +27,17 @@ package(){
 
     install -d "$pkgdir/usr/share/licenses/$pkgname"
     ln -s "/opt/$pkgname/EULA.txt" "$pkgdir/usr/share/licenses/$pkgname/EULA.txt"
+
+    touch "$pkgdir/opt/$pkgname/_furmark_log.txt"
+    touch "$pkgdir/opt/$pkgname/_geexlab_log.txt"
+    touch "$pkgdir/opt/$pkgname/settings.lua"
+    touch "$pkgdir/opt/$pkgname/conf.xml"
+    # touch imgui.ini # idk what this is, probably not needed
+    
+    chmod 646 "$pkgdir/opt/$pkgname/_furmark_log.txt"
+    chmod 646 "$pkgdir/opt/$pkgname/_geexlab_log.txt"
+    chmod 646 "$pkgdir/opt/$pkgname/settings.lua"
+    chmod 646 "$pkgdir/opt/$pkgname/conf.xml"
 
     # Install icon
     install -Dm644 "$srcdir/20240220-furmark-logo-02.png" "$pkgdir/usr/share/pixmaps/$pkgname.png"
