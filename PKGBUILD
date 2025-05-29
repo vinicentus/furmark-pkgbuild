@@ -1,4 +1,5 @@
-# Maintainer: Albert Sebastian <albertsebe2 at gmail dot com>
+# Maintainer: Vincent Långström <vincent dot langstrom at gmail dot com>
+# Contributor: Albert Sebastian <albertsebe2 at gmail dot com>
 
 pkgname=furmark
 pkgver=2.8.0.0
