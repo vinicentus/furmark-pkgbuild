@@ -3,7 +3,7 @@
 
 pkgname=furmark
 pkgver=2.8.2.0
-pkgrel=1
+pkgrel=2
 pkgdesc='Lightweight but intensive GPU stress test and benchmarking tool for OpenGL and Vulkan'
 arch=('x86_64' 'aarch64')
 url='https://www.geeks3d.com/furmark/v2/'
@@ -49,8 +49,7 @@ package(){
     install -dm757 "$pkgdir/var/log/$pkgname"
 
     ln -s "/var/log/$pkgname/furmark.log"   "$pkgdir/opt/$pkgname/_furmark_log.txt"
-    # A log file was included in 2.8.1.1. Let's override it
-    ln -sf "/var/log/$pkgname/geexlab.log"   "$pkgdir/opt/$pkgname/_geexlab_log.txt"
+    ln -s "/var/log/$pkgname/geexlab.log"   "$pkgdir/opt/$pkgname/_geexlab_log.txt"
     ln -s "/etc/opt/$pkgname/settings.lua"  "$pkgdir/opt/$pkgname/settings.lua"
     ln -s "/etc/opt/$pkgname/conf.xml"      "$pkgdir/opt/$pkgname/conf.xml"
 
