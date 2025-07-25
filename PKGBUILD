@@ -2,8 +2,8 @@
 # Contributor: Albert Sebastian <albertsebe2 at gmail dot com>
 
 pkgname=furmark
-pkgver=2.8.2.0
-pkgrel=2
+pkgver=2.9.0.0
+pkgrel=1
 pkgdesc='Lightweight but intensive GPU stress test and benchmarking tool for OpenGL and Vulkan'
 arch=('x86_64' 'aarch64')
 url='https://www.geeks3d.com/furmark/v2/'
@@ -13,12 +13,10 @@ optdepends=('vulkan-driver: Vulkan benchmark support')
 makedepends=('7zip')
 source=('furmark-gui.desktop' 'https://geeks3d.com/furmark/i/20240220-furmark-logo-02.png')
 source_x86_64=("https://gpumagick.com/downloads/files/2025/fm2/FurMark_${pkgver}_linux64.7z")
-# For some weird reason, the arm64 verison hasn't gotten the 2.8.2.0 upgrade, and is stuck on 2.8.0.0 as of 3.6.2025.
-# Hopefully it's fine to leave it like this instead of creating some pkgver function that accounts for this
-source_aarch64=("https://gpumagick.com/downloads/files/2025/fm2/FurMark_2.8.0.0_arm64.7z")
+source_aarch64=("https://gpumagick.com/downloads/files/2025/fm2/FurMark_${pkgver}_arm64.7z")
 sha256sums=('SKIP' '12A8564204C4985FF601CA83C601ADAF69B948C62EA76F213C4848EACB05C3B8')
-sha256sums_x86_64=('97D52EFA81028F9B3EC11C351C1EEEB08EB2B86108686C1AA8E7466BE936FAA1')
-sha256sums_aarch64=('39EEF070AD6191EC8443FC6E516E88C963470E0A8334CDF75C1A16BC8274AB04')
+sha256sums_x86_64=('E1A28817AD9A12C916BAD7579BE6CF7BD8EE35717CBF7C4078CD585E0986B240')
+sha256sums_aarch64=('3D4037358375783A6F5A3FD81092CB4D6C37DC79D4149DE9797D4F604103F50E')
 
 package(){
     install -d "$pkgdir/opt/$pkgname/"
